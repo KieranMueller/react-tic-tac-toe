@@ -7,6 +7,7 @@ import MoveHistory from './components/MoveHistory';
 import EndGameModal from './components/EndGameModal';
 
 function App() {
+  const [isTie, setIsTie] = useState<boolean>(false);
   const [activePlayer, setActivePlayer] = useState<Player>('X');
   const [playerNames, setPlayerNames] = useState<string[]>([
     'Player 1',
@@ -33,14 +34,20 @@ function App() {
     ]);
   }
 
-  function resetGame() {
+  function resetGame(isTie: boolean = false) {
     setWinner({
       name: activePlayer === 'X' ? playerNames[1] : playerNames[0],
       symbol: activePlayer === 'X' ? 'O' : 'X',
     });
+    if (isTie) setIsTie(true)
     setIsGameOver(true);
     setActivePlayer('X');
     setMoveHistory([]);
+  }
+
+  function setGameBackToTrue() {
+    setIsTie(false)
+    setIsGameOver(false)
   }
 
   const handleUsernameChange = (newName: string, player: Player) => {
@@ -56,9 +63,10 @@ function App() {
     <div className="container">
       {isGameOver && (
         <EndGameModal
+          isTie={isTie}
           winnerName={winner!.name}
           winnerSymbol={winner!.symbol}
-          closeModal={() => setIsGameOver(false)}
+          closeModal={setGameBackToTrue}
         />
       )}
       <div className="infos">
@@ -80,7 +88,7 @@ function App() {
       <GameBoard
         activePlayer={activePlayer}
         handleChangeTurn={handleChangeTurn}
-        handleEndGame={resetGame}
+        handleEndGame={(isTie: boolean) => resetGame(isTie)}
       />
       {moveHistory
         ?.map(move => {

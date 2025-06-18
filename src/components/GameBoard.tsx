@@ -61,12 +61,21 @@ export default function GameBoard({
     if (a && a === b && a === c) {
       resetGame()
     }
+    let hasAtLeastOneNullTile = false
+    for (let outerEl of gameState) {
+      for (let innerEl of outerEl) {
+        if (!innerEl) hasAtLeastOneNullTile = true
+      }
+    }
+    if (!hasAtLeastOneNullTile) {
+      resetGame(true)
+    }
   }
 
-  function resetGame() {
+  function resetGame(isTie: boolean = false) {
     setGameState(emptyBoard);
     setThisActivePlayer('X');
-    handleEndGame();
+    handleEndGame(isTie);
   }
 
   return (
