@@ -12,11 +12,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --blue: #3B9CFF;
-  --pink: #FF4FC1;
-  --orange: #FFA531;
-  --green: #00B876;
-  --purple: #B85FFF;
+  --blue: #3b9cff;
+  --pink: #ff4fc1;
+  --orange: #ffa531;
+  --green: #00b876;
+  --purple: #b85fff;
 }
 
 #root {
@@ -38,6 +38,10 @@ header {
   align-items: center;
 }
 
+header h3 {
+  margin: 5px;
+}
+
 .header-icon-span {
   display: flex;
   justify-content: center;
@@ -53,7 +57,7 @@ header {
   background-image: url(../tictactoebg.jpg);
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   opacity: 0.2;
@@ -116,7 +120,7 @@ button:focus-visible {
   width: 200px;
   height: 200px;
   cursor: pointer;
-  transition: scale, rotate 0.3s;
+  transition: scale 0.3s, rotate 0.3s, box-shadow 0.3s;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.382);
   display: flex;
   justify-content: center;
@@ -127,6 +131,29 @@ button:focus-visible {
 .tile:hover {
   scale: 1.03;
   rotate: 3deg;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.537);
+}
+
+.slam-in {
+  animation: slam 1s;
+}
+
+@keyframes slam {
+  0% {
+    text-shadow: 10px 10px 10px black;
+    opacity: 0.2;
+    scale: 1.3;
+  }
+}
+
+.spin {
+  animation: spin 1s;
+}
+
+@keyframes spin {
+  50% {
+    rotate: 90deg;
+  }
 }
 
 .infos {
@@ -189,6 +216,9 @@ button:focus-visible {
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.552);
   position: relative;
   animation: 1s ease pop-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .x-icon {
@@ -212,5 +242,95 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  header button {
+    font-size: 1rem;
+  }
+
+  header img.icon {
+    width: 40px;
+    margin-left: 10px;
+  }
+
+  .info-box {
+    width: 40%;
+  }
+}
+
+input {
+  width: 100px;
+}
+
+button.edit-btn {
+  padding: 2px 8px;
+}
+
+@media screen and (max-width: 800px) {
+  .tile {
+    width: 150px;
+    height: 150px;
+    font-size: 8rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  header h3 {
+    font-size: 1rem;
+  }
+
+  header button {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header button {
+    padding: 4px 8px;
+  }
+
+  .tile {
+    width: 125px;
+    height: 125px;
+  }
+
+  div.infos {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .info-box {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  header {
+    padding: 10px 10px;
+  }
+
+  .tile {
+    width: 100px;
+    height: 100px;
+    font-size: 6rem;
+  }
+
+  header span {
+    display: none;
+  }
+
+  header {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .tile {
+    width: 80px;
+    height: 80px;
+    font-size: 5rem;
   }
 }
